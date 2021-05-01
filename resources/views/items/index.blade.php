@@ -3,18 +3,35 @@
 
 @section('body')
 <h1>this is item's page</h1>
+@if (session()->has('success'))
+<div class="d-flex justify-content-center">
+    <div class="alert alert-info">
+        {{session()->get('success')}}
+    </div>
+</div>
+@endif
+@if (session()->has('delete'))
+<div class="d-flex justify-content-center">
+    <div class="alert alert-danger">
+        {{session()->get('delete')}}
+    </div>
+</div>
+@endif
 <div class="row">
     @forelse ($items as $item)
     <div class="col-sm-3 my-3">
         <div class="card h-100">
-            <img src="{{$item->image ? $item->image : asset('images/box-default.jfif')}}" class="card-img-top"
+            <img src="{{$item->image ? $item->image : asset('images/default-article.jfif')}}" class="card-img-top"
                 alt="{{$item->title}}">
             <div class="card-body">
                 <h5 class="card-title">{{$item->title}}</h5>
                 <p class="card-text">
-                    {{Str::limit($item->description, 50)}}
+                    {{Str::limit($item->description, 35)}}
+                    <a href="/item/{{$item->slug}}">Read More.</a>
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="card-footer">
+                <a href="/item/{{$item->slug}}/edit" class="btn btn-sm btn-success"><i class="far fa-edit"></i></a>
             </div>
         </div>
     </div>

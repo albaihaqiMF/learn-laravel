@@ -19,6 +19,8 @@
         integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
     </script>
 
+    <script src="https://kit.fontawesome.com/7b80ab61dd.js" crossorigin="anonymous"></script>
+
     <title>{{ isset($title) ? $title : 'Laravel 8' }}</title>
 </head>
 

@@ -14,9 +14,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at','asc')->paginate(8);
+        $items = Item::orderBy('created_at', 'asc')->paginate(8);
 
-        return view('items.index',compact('items'));
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -37,19 +37,20 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        // $slug = \Str::slug($request->title);
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
         $items = $request->all();
         $items['title'] = ucwords($request->title);
         $items['slug'] = \Str::slug($request->title);
 
         // dd($items);
         Item::create($items);
-        // Item::create([
-        //     'title'=>ucwords($request->title),
-        //     'slug'=>$slug,
-        //     'description'=>$request->description,
-        //     'image'=>$request->image,
-        // ]);
+
+        session()->flash('success', 'Data was recorded');
+
 
         return redirect()->to('/');
     }
@@ -62,7 +63,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -73,7 +74,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('items.edit', compact('item'));
     }
 
     /**
@@ -85,7 +86,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        // dd('updates');
+        $attr = $this->validate($request, [
+            'title'=> 'required',
+            'description'=> 'required',
+        ]);
+        // dd($attr);
+        $item->update($attr);
+        return redirect()->to('/');
     }
 
     /**
@@ -96,6 +104,11 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        // dd($item);
+        $item->delete();
+
+        session()->flash('delete','The Item was deleted');
+
+        return redirect('/');
     }
 }
