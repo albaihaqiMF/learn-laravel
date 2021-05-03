@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label for="Title">Title</label>
-                <input type="text" name="title" class="form-control">
+                <input type="text" name="title" class="form-control" autocomplete="off">
                 @error('title')
                     <div class="text-danger mt-2">
                         {{$message}}

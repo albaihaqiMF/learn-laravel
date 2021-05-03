@@ -22,6 +22,7 @@
     <script src="https://kit.fontawesome.com/7b80ab61dd.js" crossorigin="anonymous"></script>
 
     <title>{{ isset($title) ? $title : 'Laravel 8' }}</title>
+    @yield('head')
 </head>
 
 <body>

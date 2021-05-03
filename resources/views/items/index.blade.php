@@ -30,8 +30,10 @@
                     <a href="/item/{{$item->slug}}">Read More.</a>
                 </p>
             </div>
-            <div class="card-footer">
-                <a href="/item/{{$item->slug}}/edit" class="btn btn-sm btn-success"><i class="far fa-edit"></i></a>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="/item/{{$item->slug}}/edit" class="btn text-success"><i class="far fa-edit"></i></a>
+                {{-- <p>Published : {{ $item->created_at->format("d F, Y") }}</p> --}}
+                <p style="margin: auto 0">Published : {{ $item->created_at->diffForHumans() }}</p>
             </div>
         </div>
     </div>
