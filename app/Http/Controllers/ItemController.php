@@ -15,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::orderBy('created_at', 'asc')->paginate(8);
+        $items = Item::orderBy('updated_at', 'desc')->paginate(8);
 
         return view('items.index', compact('items'));
     }
