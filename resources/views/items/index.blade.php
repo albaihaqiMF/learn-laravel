@@ -39,6 +39,9 @@
 
                         @endauth
                         {{-- <p>Published : {{ $item->created_at->format("d F, Y") }}</p> --}}
+                        {{-- @if (auth()->check())
+                            <div>Logged In</div>
+                        @endif --}}
                         <p style="margin: auto 0">Published : {{ $item->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
