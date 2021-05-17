@@ -3,23 +3,22 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="container">
-
-        <h1>this is item's page</h1>
-        @if (session()->has('success'))
-        <div class="d-flex justify-content-center">
-            <div class="alert alert-info">
-                {{session()->get('success')}}
-            </div>
+    <h1>this is item's page</h1>
+    @if (session()->has('success'))
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-info">
+            {{session()->get('success')}}
         </div>
-        @endif
-        @if (session()->has('delete'))
-        <div class="d-flex justify-content-center">
-            <div class="alert alert-danger">
-                {{session()->get('delete')}}
-            </div>
+    </div>
+    @endif
+    @if (session()->has('delete'))
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-danger">
+            {{session()->get('delete')}}
         </div>
-        @endif
+    </div>
+    @endif
+    <div class="justify-content-center d-block">
         <div class="row w-100">
             @forelse ($items as $item)
             <div class="col-sm-3 my-3">
@@ -65,6 +64,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
 </div>

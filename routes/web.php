@@ -17,15 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 
-Route::get('item/create', [ItemController::class, 'create'])->middleware('auth')->name('items.create.get');
-Route::post('item/create', [ItemController::class, 'store'])->middleware('auth')->name('items.create.post');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('item/create', [ItemController::class, 'create'])->name('items.create.get');
+    Route::post('item/create', [ItemController::class, 'store'])->name('items.create.post');
 
-Route::get('item/{item:slug}', [ItemController::class, 'show'])->name('items.show');
+    Route::get('item/{item:slug}', [ItemController::class, 'show'])->name('items.show');
 
-Route::get('item/{item:slug}/edit', [ItemController::class, 'edit'])->middleware('auth')->name('items.edit.get');
-Route::patch('item/{item:slug}/edit', [ItemController::class, 'update'])->middleware('auth')->name('items.edit.post');
+    Route::get('item/{item:slug}/edit', [ItemController::class, 'edit'])->name('items.edit.get');
+    Route::patch('item/{item:slug}/edit', [ItemController::class, 'update'])->name('items.edit.post');
 
-Route::delete('item/{item:slug}/delete', [ItemController::class, 'destroy'])->middleware('auth')->name('items.delete');
+    Route::delete('item/{item:slug}/delete', [ItemController::class, 'destroy'])->name('items.delete');
+});
 
 Route::view('/about', 'about');
 Route::view('/contact', 'contact');
